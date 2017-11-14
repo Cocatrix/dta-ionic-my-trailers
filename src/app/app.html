@@ -1,1 +1,13 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="rootcontent">
+  <ion-content>
+    <ion-list>
+      <ul>
+        <ion-item *ngFor="let p of pages" (click)="pushPage(p)" menuClose>
+          {{p.getPageName()}}
+        </ion-item>
+      </ul>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #rootcontent [root]="rootPage"></ion-nav>
