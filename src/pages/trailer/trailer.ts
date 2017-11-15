@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Movie} from "../../models/Movie";
 
 /**
  * Generated class for the TrailerPage page.
@@ -29,19 +30,12 @@ export class TrailerPage {
     return 'Trailer';
   }
 
-  getGenres(movie) {
+  getGenres(movie: Movie) {
     /**
-     * TODO - Put this method in Movie class
      * Return the string of movie's genres of this format :
      * "Genre : Action" (if one genre only)
      * "Genres : Romance, Drama"
      */
-    const genres = movie.genre;
-    const nbGenres = genres.length;
-    let genresString: string = (nbGenres > 1 ? 'Genres : ' : 'Genre : ');
-    for(let i:number = 0;i<nbGenres-1;i++) {
-      genresString = genresString + genres[i] + ", ";
-    }
-    return genresString + genres[nbGenres-1];
+    return movie.getGenres();
   }
 }

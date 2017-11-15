@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HttpclientProvider} from "../../providers/httpclient/httpclient";
 import {TrailerPage} from "../trailer/trailer";
+import {MovieFactoryProvider} from "../../providers/movie-factory/movie-factory";
+import {Movie} from "../../models/Movie";
 
 /**
  * Generated class for the TrailersPage page.
@@ -19,11 +21,13 @@ import {TrailerPage} from "../trailer/trailer";
 export class TrailersPage {
 
   public url: string = "http://10.1.1.116:8080/trailers";
-  public trailers: Array<any>;
+  public trailers: Array<Movie>;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public httpClientProvider: HttpclientProvider) {
+              public httpClientProvider: HttpclientProvider,
+              public movieFactory: MovieFactoryProvider,
+              ){
   }
 
   ionViewDidLoad() {
@@ -38,13 +42,16 @@ export class TrailersPage {
   getTrailersFromHttp(givenUrl: string = this.url) {
     /**
      * Makes asynchronous call to given URL to get a list of movies in Json format.
-     * The list is sorted right after.
+     * The list is casted in Movie/Trailer types, then sorted (in createListMovies).
      */
     this.httpClientProvider.httpGet(givenUrl)
       .subscribe((result:any) => {
         console.log('next');
-        this.trailers = result;
-        this.sortTrailers();
+        this.movieFactory.createListMovies(result).then((movies) => {
+          this.trailers = movies
+        }, () => {
+          console.log('error createListMovies');
+        });
       }, () => {
         console.log('error');
       }, () => {
@@ -52,41 +59,16 @@ export class TrailersPage {
       });
   }
 
-  trailerComparator(t1, t2) {
+  getGenres(movie: Movie) {
     /**
-     * A comparator created to be able to sort movies by title.
-     * With two movies, return -1 if t1 '<' t2, 1 if t1 '>' t2.
-     */
-    if (t1.title < t2.title) {
-      return -1;
-    } else if (t1.title > t2.title) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  sortTrailers() {
-    this.trailers.sort(this.trailerComparator);
-  }
-
-  getGenres(trailer) {
-    /**
-     * TODO - Put this method in Movie class
      * Return the string of movie's genres of this format :
      * "Genre : Action" (if one genre only)
      * "Genres : Romance, Drama"
      */
-    const genres = trailer.genre;
-    const nbGenres = genres.length;
-    let genresString: string = (nbGenres > 1 ? 'Genres : ' : 'Genre : ');
-    for(let i:number = 0;i<nbGenres-1;i++) {
-      genresString = genresString + genres[i] + ", ";
-    }
-    return genresString + genres[nbGenres-1];
+    return movie.getGenres();
   }
 
-  showMovieDetails(movie) {
+  seeMovieDetails(movie) {
     this.navCtrl.push(TrailerPage,{movieSent: movie}).then();
   }
 }

@@ -16,4 +16,17 @@ export class TrailerFactoryProvider {
   createTrailer(postdate, url, type, exclusive, hd) {
     return new MovieTrailer(postdate, url, type, exclusive, hd);
   }
+
+  createTrailers(trailerList) {
+    let trailerTab = [];
+    for (let trailer of trailerList) {
+      trailerTab.push(this.createTrailer(
+        trailer.posdate,
+        trailer.url,
+        trailer.type,
+        trailer.exclusive,
+        trailer.hd))
+    }
+    return trailerTab;
+  }
 }
