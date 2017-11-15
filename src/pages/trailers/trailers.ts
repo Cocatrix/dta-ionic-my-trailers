@@ -48,7 +48,7 @@ export class TrailersPage {
       .subscribe((result:any) => {
         console.log('next');
         this.movieFactory.createListMovies(result).then((movies) => {
-          this.trailers = movies
+          this.trailers = movies;
         }, () => {
           console.log('error createListMovies');
         });

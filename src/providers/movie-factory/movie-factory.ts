@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Movie} from '../../models/Movie';
-import {MovieTrailer} from '../../models/MovieTrailer';
 import {TrailerFactoryProvider} from '../trailer-factory/trailer-factory';
 
 /*
@@ -18,40 +17,18 @@ export class MovieFactoryProvider {
     console.log('Hello MovieFactoryProvider Provider');
   }
 
-  getMovies() {
-    return new Promise((resolve => this.movies));
-  }
-
-  createMovie(title, release, studio, poster, moviesite, location, rating, genre, director, actors, trailers) {
-    let movie = new Movie(title, release, studio, poster, moviesite, location, rating, genre, director, actors, trailers);
-    this.movies.push(movie);
+  createMovie(movie, trailers) {
+    this.movies.push(new Movie(movie, trailers));
   }
 
   createListMovies(result) {
     /**
      * With Json list, creates an array of movies.
-     * Also calls createTrailer of trailerFactory.
+     * Also calls createTrailer of trailerFactory for trailer property.
      */
-
-    for (let movie of result) {
-      const trailerTab: Array<MovieTrailer> = this.trailerFactory.createTrailers(movie.trailers);
-      this.createMovie(
-        movie.title,
-        movie.release,
-        movie.studio,
-        movie.poster,
-        movie.moviesite,
-        movie.location,
-        movie.rating,
-        movie.genre,
-        movie.director,
-        movie.actors,
-        trailerTab)
-    }
+    result.map(movie => this.createMovie(movie, this.trailerFactory.createTrailers(movie.trailers)));
     this.sortMovies();
     return new Promise(resolve => resolve(this.movies));
-    //const listMoviesPromise = this.getMovies().then;
-    //return listMoviesPromise;
   }
 
   static movieComparator(t1, t2) {

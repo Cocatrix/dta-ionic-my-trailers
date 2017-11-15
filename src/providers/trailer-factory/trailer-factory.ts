@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {MovieTrailer} from "../../models/MovieTrailer";
 
@@ -13,20 +12,13 @@ export class TrailerFactoryProvider {
 
   constructor() { }
 
-  createTrailer(postdate, url, type, exclusive, hd) {
-    return new MovieTrailer(postdate, url, type, exclusive, hd);
+  createTrailer(trailer) {
+    return new MovieTrailer(trailer);
   }
 
   createTrailers(trailerList) {
     let trailerTab = [];
-    for (let trailer of trailerList) {
-      trailerTab.push(this.createTrailer(
-        trailer.posdate,
-        trailer.url,
-        trailer.type,
-        trailer.exclusive,
-        trailer.hd))
-    }
+    trailerList.map(trailer => trailerTab.push(this.createTrailer(trailer)));
     return trailerTab;
   }
 }
