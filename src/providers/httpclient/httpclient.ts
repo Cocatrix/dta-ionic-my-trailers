@@ -15,6 +15,6 @@ export class HttpclientProvider {
   }
 
   httpGet(url: string) {
-    
+    return this.http.get(url);
   }
 }

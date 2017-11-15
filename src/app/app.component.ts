@@ -24,12 +24,7 @@ export class MyApp {
       splashScreen.hide();
     });
   }
-/*
-  ngOnInit() {
-    console.log(this.rootPage);
-    this.nav.push(this.rootPage);
-  }
-*/
+
   pushPage(page: any) {
     this.nav.push(page);
   }

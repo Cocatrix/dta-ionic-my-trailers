@@ -14,5 +14,15 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let t of trailers">
+      <ion-thumbnail item-start>
+        <ion-img height="150" src={{t.poster}}></ion-img>
+      </ion-thumbnail>
+      {{t.title}}
+      <p>{{getGenres(t)}}</p>
+      <!--{{t.poster}}-->
+    </ion-item>
+  </ion-list>
 
 </ion-content>
