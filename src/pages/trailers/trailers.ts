@@ -17,7 +17,7 @@ import {HttpclientProvider} from "../../providers/httpclient/httpclient";
 })
 export class TrailersPage {
 
-  public url: string = "http://localhost:8080/trailers";
+  public url: string = "http://10.1.1.116:8080/trailers";
   public trailers: Array<any>;
 
   constructor(public navCtrl: NavController,
