@@ -13,6 +13,7 @@ import {PreferencesPage} from '../pages/preferences/preferences';
 import {HttpClientModule} from "@angular/common/http";
 import { HttpclientProvider } from '../providers/httpclient/httpclient';
 import { MovieFactoryProvider } from '../providers/movie-factory/movie-factory';
+import { TrailerFactoryProvider } from '../providers/trailer-factory/trailer-factory';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MovieFactoryProvider } from '../providers/movie-factory/movie-factory';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpclientProvider,
-    MovieFactoryProvider
+    MovieFactoryProvider,
+    TrailerFactoryProvider
   ]
 })
 export class AppModule {

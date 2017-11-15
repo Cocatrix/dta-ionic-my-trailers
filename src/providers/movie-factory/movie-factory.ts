@@ -10,11 +10,19 @@ import {Movie} from "../../models/Movie";
 */
 @Injectable()
 export class MovieFactoryProvider {
+  /**
+   * TODO - Handle all movie manipulations here
+   * Use Movie and Trailer classes
+   */
+  public movies: Array<Movie> = [];
 
-  public trailers: Array<Movie>;
-
-  constructor(public http: HttpClient) {
+  constructor() {
     console.log('Hello MovieFactoryProvider Provider');
   }
 
+  createMovie(title, release, studio, poster, moviesite, location, rating, genre, director, actors, trailers) {
+    let movie = new Movie(title, release, studio, poster, moviesite, location, rating, genre, director, actors, trailers);
+    this.movies.push(movie);
+    return movie;
+  }
 }

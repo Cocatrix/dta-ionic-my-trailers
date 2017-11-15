@@ -1,3 +1,32 @@
 page-trailer {
 
 }
+
+.smallCard {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardLeftContainer {
+  padding: 0 20px;
+}
+
+.largePoster {
+  height:400px;
+}
+
+.cardRightContainer {
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left:10px;
+}
+
+#movieTitle {
+  font-size:1.2em;
+}
+
+#movieGenre {
+  font-size:0.9em;
+  color: darkslategray;
+}

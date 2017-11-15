@@ -14,5 +14,14 @@
 
 
 <ion-content padding>
-
+  <div class="largeCard">
+    <div class="cardLeftContainer">
+      <img src={{t.poster}} class="largePoster">
+    </div>
+    <div class="cardRightContainer">
+      <span id="movieTitle"> {{t.title}} </span>
+      <br>
+      <span id="movieGenre">{{getGenres(t)}}</span>
+    </div>
+  </div>
 </ion-content>
