@@ -12,6 +12,7 @@ import {BookmarksPage} from '../pages/bookmarks/bookmarks';
 import {PreferencesPage} from '../pages/preferences/preferences';
 import {HttpClientModule} from "@angular/common/http";
 import { HttpclientProvider } from '../providers/httpclient/httpclient';
+import { MovieFactoryProvider } from '../providers/movie-factory/movie-factory';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpclientProvider } from '../providers/httpclient/httpclient';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpclientProvider
+    HttpclientProvider,
+    MovieFactoryProvider
   ]
 })
 export class AppModule {
