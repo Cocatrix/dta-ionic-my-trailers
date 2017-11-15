@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HttpclientProvider} from "../../providers/httpclient/httpclient";
+import {TrailerPage} from "../trailer/trailer";
 
 /**
  * Generated class for the TrailersPage page.
@@ -71,6 +72,7 @@ export class TrailersPage {
 
   getGenres(trailer) {
     /**
+     * TODO - Put this method in Movie class
      * Return the string of movie's genres of this format :
      * "Genre : Action" (if one genre only)
      * "Genres : Romance, Drama"
@@ -84,4 +86,7 @@ export class TrailersPage {
     return genresString + genres[nbGenres-1];
   }
 
+  showMovieDetails(movie) {
+    this.navCtrl.push(TrailerPage,{movieSent: movie}).then();
+  }
 }

@@ -15,7 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TrailerPage {
 
+  public movie: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.movie = this.navParams.get('movieSent');
   }
 
   ionViewDidLoad() {
@@ -24,5 +27,21 @@ export class TrailerPage {
 
   static getPageName() {
     return 'Trailer';
+  }
+
+  getGenres(movie) {
+    /**
+     * TODO - Put this method in Movie class
+     * Return the string of movie's genres of this format :
+     * "Genre : Action" (if one genre only)
+     * "Genres : Romance, Drama"
+     */
+    const genres = movie.genre;
+    const nbGenres = genres.length;
+    let genresString: string = (nbGenres > 1 ? 'Genres : ' : 'Genre : ');
+    for(let i:number = 0;i<nbGenres-1;i++) {
+      genresString = genresString + genres[i] + ", ";
+    }
+    return genresString + genres[nbGenres-1];
   }
 }
