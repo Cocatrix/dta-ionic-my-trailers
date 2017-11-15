@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TrailersPage } from './trailers';
+import {HttpclientProvider} from "../../providers/httpclient/httpclient";
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { TrailersPage } from './trailers';
   ],
   imports: [
     IonicPageModule.forChild(TrailersPage),
+    HttpclientProvider
   ],
 })
 export class TrailersPageModule {}

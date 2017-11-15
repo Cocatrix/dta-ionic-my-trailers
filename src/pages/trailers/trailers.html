@@ -12,7 +12,19 @@
 
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let t of trailers" (click)="seeMovieDetails(t)">
+      <div class="smallCard">
+        <div class="cardLeftContainer">
+          <img src={{t.poster}} class="smallPoster">
+        </div>
+        <div class="cardRightContainer">
+          <span id="movieTitle"> {{t.title}} </span>
+          <br>
+          <span id="movieGenre">{{getGenres(t)}}</span>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

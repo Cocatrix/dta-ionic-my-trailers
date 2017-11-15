@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Movie} from "../../models/Movie";
 
 /**
  * Generated class for the TrailerPage page.
@@ -15,7 +16,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TrailerPage {
 
+  public movie: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.movie = this.navParams.get('movieSent');
   }
 
   ionViewDidLoad() {
@@ -24,5 +28,14 @@ export class TrailerPage {
 
   static getPageName() {
     return 'Trailer';
+  }
+
+  getGenres(movie: Movie) {
+    /**
+     * Return the string of movie's genres of this format :
+     * "Genre : Action" (if one genre only)
+     * "Genres : Romance, Drama"
+     */
+    return movie.getGenres();
   }
 }
